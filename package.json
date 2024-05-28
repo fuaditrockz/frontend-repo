@@ -22,9 +22,11 @@
     "@mui/material": "^5.15.18",
     "@mui/material-nextjs": "^5.15.11",
     "@mui/system": "^5.15.15",
+    "@reduxjs/toolkit": "^2.2.5",
     "next": "14.2.3",
     "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "@types/node": "^20",

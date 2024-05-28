@@ -1,8 +1,18 @@
+"use client";
+
 import { Container, Box, Grid, TextField } from "@mui/material";
 import { Button } from "@mui/joy";
 import styles from "./page.module.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout, InitialState } from "@/store/reducers";
+
 export default function Home() {
+  const userData = useSelector((state: any) => state.auth.value);
+  const dispatch = useDispatch();
+
+  console.log("test user data", userData);
+
   return (
     <main className={styles.main}>
       <Container fixed>
