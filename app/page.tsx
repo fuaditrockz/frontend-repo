@@ -1,95 +1,90 @@
-import Image from "next/image";
+import { Container, Box, Grid, TextField } from "@mui/material";
+import { Button } from "@mui/joy";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+      <Container fixed>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: "60vh" }}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          <Grid item xs={3}>
+            <Box
+              height={450}
+              width={400}
+              my={4}
+              gap={4}
+              px={2}
+              py={4}
+              sx={{ border: "1px solid #4834d4", borderRadius: 5 }}
+            >
+              <h1
+                style={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  width: "100%",
+                  marginBottom: "20px",
+                }}
+              >
+                Register
+              </h1>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ width: "100%" }}
+                    id="outlined-basic"
+                    label="Full Name"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ width: "100%" }}
+                    id="outlined-basic"
+                    label="Email"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    style={{ width: "100%" }}
+                    id="outlined-basic"
+                    label="Password"
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                style={{
+                  marginTop: 20,
+                  marginBottom: 20,
+                  width: "100%",
+                  backgroundColor: "#4834d4",
+                }}
+              >
+                Register
+              </Button>
+              <span
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  display: "inline-flex",
+                  justifyContent: "space-around",
+                  padding: "0 60px",
+                }}
+              >
+                <p>Doesn&lsquo;t have an account?</p> <a href="#">Login</a>
+              </span>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </main>
   );
 }
