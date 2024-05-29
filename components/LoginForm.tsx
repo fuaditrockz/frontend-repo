@@ -9,13 +9,12 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
-  displayName: string;
   email: string;
   password: string;
 };
 
 const registerUser = async (data: any) => {
-  const response = await fetch("/api/register", {
+  const response = await fetch("/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +22,6 @@ const registerUser = async (data: any) => {
     redirect: "follow",
     cache: "force-cache",
     body: JSON.stringify({
-      displayName: data.displayName,
       email: data.email,
       password: data.password,
     }),
@@ -33,7 +31,7 @@ const registerUser = async (data: any) => {
   return result;
 };
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -46,7 +44,7 @@ export default function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const onClickRegister: SubmitHandler<Inputs> = async (inputData) => {
+  const onClickLogin: SubmitHandler<Inputs> = async (inputData) => {
     console.log("REGISTERING ->", inputData);
 
     setIsLoading(true);
@@ -63,7 +61,7 @@ export default function RegisterForm() {
 
     console.log("FETCHED ->", data);
 
-    if (code === 201) {
+    if (code === 200) {
       const { full_name, email, created_at, last_login } = data;
       const userData = {
         isAuthenticated: true,
@@ -86,17 +84,8 @@ export default function RegisterForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onClickRegister)}>
+      <form onSubmit={handleSubmit(onClickLogin)}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              id="displayName"
-              {...register("displayName")}
-              style={{ width: "100%" }}
-              label="Full Name"
-              variant="outlined"
-            />
-          </Grid>
           <Grid item xs={12}>
             <TextField
               id="email"
@@ -127,7 +116,7 @@ export default function RegisterForm() {
           }}
           type="submit"
         >
-          Register
+          Log In
         </Button>
       </form>
       {errorMessage && errorMessage.length > 0 && (

@@ -12,6 +12,7 @@ export type AuthInitialState = {
   email_verified: boolean;
   created_at: any;
   last_login: any;
+  authBoxPage: string;
 };
 
 const initialState: InitialState = {
@@ -23,6 +24,7 @@ const initialState: InitialState = {
     email_verified: false,
     created_at: "",
     last_login: "",
+    authBoxPage: "register",
   } as AuthInitialState,
 };
 
@@ -39,7 +41,10 @@ export const authSlice = createSlice({
       state.value = initialState.value;
       return state;
     },
+    setAuthBoxPage: (state: InitialState, action: PayloadAction<string>) => {
+      state.value.authBoxPage = action.payload;
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setAuthBoxPage } = authSlice.actions;

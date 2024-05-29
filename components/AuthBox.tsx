@@ -1,9 +1,17 @@
 "use client";
 
 import { Box } from "@mui/material";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+
 import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
+import { setAuthBoxPage } from "@/store/reducers";
 
 export default function AuthBox() {
+  const dispatch = useDispatch();
+  const authBoxPage = useSelector((state: any) => state.auth.value.authBoxPage);
+
   return (
     <Box
       height={450}
@@ -22,20 +30,37 @@ export default function AuthBox() {
           marginBottom: "20px",
         }}
       >
-        Register
+        {authBoxPage === "register" ? "Register" : "Login"}
       </h1>
-      <RegisterForm />
-      <span
-        style={{
-          textAlign: "center",
-          width: "100%",
-          display: "inline-flex",
-          justifyContent: "space-around",
-          padding: "0 60px",
-        }}
+      {authBoxPage === "register" && <RegisterForm />}
+      {authBoxPage === "login" && <LoginForm />}
+      <div
+        style={{ display: "inline", justifyContent: "center", width: "100%" }}
       >
-        <p>Doesn&lsquo;t have an account?</p> <a href="#">Login</a>
-      </span>
+        <span
+          style={{
+            textAlign: "center",
+            width: "100%",
+            display: "inline-flex",
+          }}
+        >
+          <p style={{ marginRight: 5 }}>
+            {authBoxPage === "register"
+              ? "Have an account?"
+              : "Doesn't have an account?"}
+          </p>{" "}
+          <Link
+            href="#"
+            onClick={() => {
+              if (authBoxPage === "register") dispatch(setAuthBoxPage("login"));
+              else dispatch(setAuthBoxPage("register"));
+            }}
+            style={{ fontWeight: "bold" }}
+          >
+            {authBoxPage === "register" ? "Login" : "Register"}
+          </Link>
+        </span>
+      </div>
     </Box>
   );
 }
