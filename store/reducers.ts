@@ -10,8 +10,8 @@ export type AuthInitialState = {
   email: string;
   photo_url: string;
   email_verified: boolean;
-  created_at: string;
-  last_login: string;
+  created_at: any;
+  last_login: any;
 };
 
 const initialState: InitialState = {
@@ -30,8 +30,9 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state: InitialState, action: PayloadAction<InitialState>) => {
-      state.value = action.payload.value;
+    login: (state: InitialState, action: PayloadAction<any>) => {
+      console.log("ACTION PAYLOAD", action.payload);
+      state.value = action.payload;
       return state;
     },
     logout: (state: InitialState) => {
