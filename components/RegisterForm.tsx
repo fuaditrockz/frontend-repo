@@ -2,8 +2,8 @@ import { TextField, Grid } from "@mui/material";
 import { Button } from "@mui/joy";
 
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout, InitialState } from "@/store/reducers";
-import { useEffect, useState } from "react";
+import { login } from "@/store/reducers";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const register = async () => {

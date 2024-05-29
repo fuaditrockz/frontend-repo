@@ -24,6 +24,7 @@
     "@mui/system": "^5.15.15",
     "@reduxjs/toolkit": "^2.2.5",
     "next": "14.2.3",
+    "next-client-cookies": "^1.1.1",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-redux": "^9.1.2"
