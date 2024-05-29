@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FRONTEND-REPO
+
+## About
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) for Ebuddy Technical Test.
+
+### Backend Repository
+
+To run this project properly on your local, please clone and install the backend project [here](https://github.com/fuaditrockz/backend-repo). And just follow the instructions. CORS already setup, just running it.
 
 ## Getting Started
 
-First, run the development server:
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone git@github.com:fuaditrockz/frontend-repo.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd frontend-repo
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This project running on http://localhost:3000.
 
-## Deploy on Vercel
+For the [backend server](https://github.com/fuaditrockz/backend-repo) running on http://localhost:4000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Demo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Index Page
+
+#### Register
+
+![alt text](https://res.cloudinary.com/telecreativenow/image/upload/v1717019044/DEMO/Screenshot_2024-05-30_at_04.42.05.png)
+
+#### Login
+
+![alt text](https://res.cloudinary.com/telecreativenow/image/upload/v1717019178/DEMO/Screenshot_2024-05-30_at_04.46.11.png)
+
+## Technical Test Requirements
+
+✅ Create a Frontend Repository
+
+✅ Repository Name: frontend-repo
+
+✅ Framework: Next.js
+
+✅ UI Library: React MUI
+
+✅ Directory Structure
+
+- Create the following folders: apis, components, store.
+
+✅ Setup Redux
+
+- Configure Redux for state management.
+
+✅ Button and update data API Integration
+
+- Button: Create a button to trigger the backend endpoint.
+- API Abstraction: Ensure proper abstraction for API calls.
+- State Management: Use Redux to manage and display the state of the update process, including loading, success, and error messages using Typography.
+
+✅ Display label with fetch data API Integration using SSR
+
+❌ FE repo able to test API calling locally using Firebase Emulator
+
+- I'm utilize the [backend-repo](https://github.com/fuaditrockz/backend-repo) to handle the backend on this project. Because I was in a hurry to finish this on time and didn't understand the instructions (I was confused about whether part 1 and part 2 were continuous or not). Because if so, there will be redundant endpoints during the demo.
