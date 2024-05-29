@@ -13,7 +13,7 @@ type Inputs = {
   password: string;
 };
 
-const registerUser = async (data: any) => {
+const loginUser = async (data: any) => {
   const response = await fetch("/api/login", {
     method: "POST",
     headers: {
@@ -45,7 +45,7 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const onClickLogin: SubmitHandler<Inputs> = async (inputData) => {
-    console.log("REGISTERING ->", inputData);
+    console.log("LOGING ->", inputData);
 
     setIsLoading(true);
     setErrorMessage("");
@@ -57,7 +57,7 @@ export default function LoginForm() {
       code: number;
       message: string;
       data?: any;
-    } = await registerUser(inputData);
+    } = await loginUser(inputData);
 
     console.log("FETCHED ->", data);
 

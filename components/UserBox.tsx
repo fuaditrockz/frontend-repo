@@ -6,6 +6,7 @@ import {
   ListItemText,
   Typography,
   List,
+  TextField,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@mui/joy";
@@ -14,21 +15,6 @@ import { login, logout } from "@/store/reducers";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 
-const getUserData = async () => {
-  const response = await fetch("/api/user", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    cache: "force-cache",
-  });
-
-  const result = await response.json();
-  console.log("RESULT", result);
-  return result;
-};
-
 export default function UserBox() {
   const userData = useSelector((state: any) => state.auth.value);
   const dispatch = useDispatch();
@@ -36,6 +22,8 @@ export default function UserBox() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [fullName, setFullName] = useState("");
 
   useEffect(() => {
     if (userData.email === "") {
@@ -45,9 +33,37 @@ export default function UserBox() {
 
   const getUser = async () => {
     setLoading(true);
-    const res = await getUserData();
-    dispatch(login(res.data));
+
+    const res = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await res.json();
+
+    dispatch(login(result.data));
+    setFullName(result.data.full_name);
     setLoading(false);
+  };
+
+  const updateUser = async () => {
+    const res = await fetch("/api/update-user-data", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      cache: "force-cache",
+      body: JSON.stringify({
+        full_name: fullName,
+      }),
+    });
+
+    const result = await res.json();
+    console.log("RESULT", result);
+
+    setIsEdit(false);
   };
 
   return (
@@ -78,21 +94,35 @@ export default function UserBox() {
         }}
       >
         <ListItem alignItems="flex-start">
-          <ListItemText
-            primary="Full Name"
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  {userData.full_name}
-                </Typography>
-              </React.Fragment>
-            }
-          />
+          {!isEdit && (
+            <ListItemText
+              primary="Full Name"
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    fontSize={20}
+                    fontWeight={500}
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {fullName}
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          )}
+          {isEdit && (
+            <TextField
+              style={{ fontWeight: 500, width: "100%" }}
+              id="displayName"
+              label="Full Name"
+              variant="standard"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+          )}
         </ListItem>
         <ListItem alignItems="flex-start">
           <ListItemText
@@ -100,12 +130,14 @@ export default function UserBox() {
             secondary={
               <React.Fragment>
                 <Typography
+                  fontSize={20}
+                  fontWeight={500}
                   sx={{ display: "inline" }}
                   component="span"
                   variant="body2"
                   color="text.primary"
                 >
-                  {userData.email}
+                  {userData?.email}
                 </Typography>
               </React.Fragment>
             }
@@ -117,12 +149,14 @@ export default function UserBox() {
             secondary={
               <React.Fragment>
                 <Typography
+                  fontSize={20}
+                  fontWeight={500}
                   sx={{ display: "inline" }}
                   component="span"
                   variant="body2"
                   color="text.primary"
                 >
-                  {userData.email_verified ? "Verified" : "Not Verified"}
+                  {userData?.email_verified ? "Verified" : "Not Verified"}
                 </Typography>
               </React.Fragment>
             }
@@ -141,14 +175,18 @@ export default function UserBox() {
           style={{
             marginTop: 20,
             marginBottom: 10,
-            backgroundColor: "#4834d4",
+            backgroundColor: isEdit ? "#f0932b" : "#4834d4",
             justifyContent: "right",
           }}
           onClick={() => {
-            getUser();
+            if (isEdit) {
+              updateUser();
+            } else {
+              setIsEdit(true);
+            }
           }}
         >
-          Edit
+          {isEdit ? "Save" : "Edit"}
         </Button>
         <div
           style={{
@@ -180,7 +218,6 @@ export default function UserBox() {
               justifyContent: "right",
             }}
             onClick={() => {
-              console.log("cookies test");
               cookies.remove("currentUser");
               dispatch(logout());
               router.push("/");

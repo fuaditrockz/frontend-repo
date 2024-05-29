@@ -13,8 +13,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:4000",
         },
-        redirect: "follow",
-        cache: "force-cache",
         body: JSON.stringify({
           displayName,
           email,
@@ -27,7 +25,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     console.log("SERVER SIDE", registeredUser);
 
-    if (registeredUser.code === 201) {
+    if (!registeredUser.error) {
       cookies().set(
         "currentUser",
         registeredUser.data?.tokenManager.access_token,
