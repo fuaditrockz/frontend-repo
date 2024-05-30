@@ -7,6 +7,7 @@ import { login } from "@/store/reducers";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
 
 type Inputs = {
   email: string;
@@ -85,27 +86,48 @@ export default function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onClickLogin)}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              id="email"
-              {...register("email")}
-              style={{ width: "100%" }}
-              label="Email"
-              variant="outlined"
+        {isLoading ? (
+          <div
+            style={{
+              margin: "30px 0",
+            }}
+          >
+            <ClipLoader
+              color={"#4834d4"}
+              loading={isLoading}
+              cssOverride={{
+                display: "block",
+                margin: "0 auto",
+                borderColor: "#4834d4",
+              }}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
             />
+          </div>
+        ) : (
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                id="email"
+                {...register("email")}
+                style={{ width: "100%" }}
+                label="Email"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="password"
+                type="password"
+                {...register("password")}
+                style={{ width: "100%" }}
+                label="Password"
+                variant="outlined"
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="password"
-              type="password"
-              {...register("password")}
-              style={{ width: "100%" }}
-              label="Password"
-              variant="outlined"
-            />
-          </Grid>
-        </Grid>
+        )}
         <Button
           loading={isLoading}
           style={{

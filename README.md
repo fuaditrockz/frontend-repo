@@ -31,7 +31,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 This project running on http://localhost:3000.
@@ -49,6 +49,10 @@ For the [backend server](https://github.com/fuaditrockz/backend-repo) running on
 #### Login
 
 ![alt text](https://res.cloudinary.com/telecreativenow/image/upload/v1717019178/DEMO/Screenshot_2024-05-30_at_04.46.11.png)
+
+#### User Data
+
+![alt text](https://res.cloudinary.com/telecreativenow/image/upload/v1717062872/DEMO/Screenshot_2024-05-30_at_16.54.22.png)
 
 ## Technical Test Requirements
 

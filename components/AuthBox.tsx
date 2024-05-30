@@ -7,10 +7,13 @@ import { useSelector, useDispatch } from "react-redux";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import { setAuthBoxPage } from "@/store/reducers";
+import { useState } from "react";
 
 export default function AuthBox() {
   const dispatch = useDispatch();
   const authBoxPage = useSelector((state: any) => state.auth.value.authBoxPage);
+
+  const [loading, isLoading] = useState(false);
 
   return (
     <Box

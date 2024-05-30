@@ -23,8 +23,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const registeredUser: any = await registerResult.json();
 
-    console.log("SERVER SIDE", registeredUser);
-
     if (!registeredUser.error) {
       cookies().set(
         "currentUser",

@@ -6,8 +6,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     const { full_name } = await req.json();
 
     const accessToken = cookies().get("currentUser")?.value;
-    console.log("COOKIES UPDATE USER DATA", accessToken);
-    console.log("FULL NAME", full_name);
 
     const userDataResult: any = await fetch(
       "http://localhost:4000/v2/update-user-data",
@@ -25,8 +23,6 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     );
 
     const userData: any = await userDataResult.json();
-
-    console.log("SERVER SIDE", userData);
 
     return NextResponse.json(userData);
   } catch (error: any) {

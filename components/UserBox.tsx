@@ -26,9 +26,7 @@ export default function UserBox() {
   const [fullName, setFullName] = useState("");
 
   useEffect(() => {
-    if (userData.email === "") {
-      getUser();
-    }
+    getUser();
   }, []);
 
   const getUser = async () => {
@@ -107,7 +105,7 @@ export default function UserBox() {
                     variant="body2"
                     color="text.primary"
                   >
-                    {fullName}
+                    {fullName ?? userData?.full_name}
                   </Typography>
                 </React.Fragment>
               }
@@ -119,7 +117,7 @@ export default function UserBox() {
               id="displayName"
               label="Full Name"
               variant="standard"
-              value={fullName}
+              value={fullName ?? userData?.full_name}
               onChange={(e) => setFullName(e.target.value)}
             />
           )}
@@ -196,6 +194,7 @@ export default function UserBox() {
           }}
         >
           <Button
+            disabled={isEdit}
             loading={loading}
             style={{
               marginTop: 20,

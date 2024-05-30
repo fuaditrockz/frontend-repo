@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const accessToken = cookies().get("currentUser")?.value;
-    console.log("COOKIES GET USER DATA", accessToken);
 
     const userDataResult: any = await fetch(
       "http://localhost:4000/v2/fetch-user-data",
@@ -20,11 +19,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const userData: any = await userDataResult.json();
 
-    console.log("SERVER SIDE USER", userData);
-
     return NextResponse.json(userData);
   } catch (error: any) {
-    console.log("SERVER ERROR", error);
     return NextResponse.error();
   }
 }
